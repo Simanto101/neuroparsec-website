@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NeuroParsec - Hero Version B: Connected Care Network</title>
+<meta name="description" content="Version B hero preview for NeuroParsec: a connected-care network linking hospital, patient, phone and care team, with an ECG pulse line.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a1826;
+  --dim:#47617a;
+  --accent:#0284c7;
+  --accent2:#22d3ee;
+  --card:rgba(255,255,255,.72);
+  --card-border:rgba(255,255,255,.9);
+  --shadow:0 14px 34px rgba(25,60,95,.14);
+  --radius:20px;
+}
+*{ margin:0; padding:0; box-sizing:border-box; }
+html{ scroll-behavior:smooth; }
+body{
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  color:var(--ink);
+  background:linear-gradient(135deg,#dbe7f1 0%, #e9f1f7 42%, #dde9f2 78%, #cfdfec 100%);
+  background-attachment:fixed;
+  min-height:100vh;
+  line-height:1.6;
+}
+a{ color:var(--accent); }
+.wrap{ max-width:1180px; margin:0 auto; padding:0 32px; }
+
+/* Header */
+header.site{
+  position:sticky; top:0; z-index:50;
+  display:flex; align-items:center; justify-content:space-between; gap:20px;
+  padding:18px 46px;
+  background:rgba(233,241,247,.82); backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.7);
+}
+.brand{ display:flex; align-items:center; gap:11px; color:var(--ink); text-decoration:none; flex-shrink:0; }
+.brand svg{ width:25px; height:25px; color:var(--accent); }
+.brand span{ font-family:'Space Grotesk',sans-serif; font-size:17px; letter-spacing:.30em; font-weight:600; }
+nav.links{ display:flex; gap:32px; }
+nav.links a{ color:#33506b; text-decoration:none; font-size:14px; font-weight:500; }
+nav.links a:hover{ color:var(--ink); }
+nav.links a.on{ color:var(--ink); font-weight:600; }
+
+/* Buttons */
+.btn{ display:inline-flex; align-items:center; gap:9px; text-decoration:none; font-weight:600; font-size:14.5px; padding:14px 28px; border-radius:999px; transition:transform .15s ease, box-shadow .15s ease; }
+.btn:hover{ transform:translateY(-1px); }
+.btn-dark{ background:#0a1826; color:#fff; box-shadow:0 10px 24px rgba(10,24,38,.22); }
+.btn-ghost{ border:1.5px solid rgba(10,24,38,.28); color:var(--ink); background:rgba(255,255,255,.35); }
+.btn-small{ padding:10px 20px; font-size:13.5px; }
+
+/* Pill + tagline */
+.pill{ display:inline-block; background:rgba(255,255,255,.75); border:1px solid rgba(255,255,255,.9); box-shadow:0 6px 18px rgba(30,70,110,.10);
+  padding:8px 16px; border-radius:999px; font-size:12.5px; font-weight:600; color:#1d4258; }
+.tagline{ margin-top:34px; font-family:'Space Grotesk',sans-serif; font-size:12.5px; font-weight:600; letter-spacing:.34em; color:var(--accent); }
+
+/* Hero */
+.hero{ position:relative; min-height:calc(100vh - 74px); display:flex; align-items:center; padding:48px 0 64px; overflow:hidden; }
+.glow-bg{ position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(ellipse 55% 45% at 74% 40%, rgba(56,189,248,.20), rgba(56,189,248,0) 62%); }
+.hero-grid{ position:relative; display:grid; grid-template-columns:minmax(0,600px) 1fr; gap:40px; align-items:center; width:100%; }
+.hero h1{ font-size:clamp(44px,6.4vw,79px); line-height:1.04; font-weight:600; letter-spacing:-.025em; margin-top:26px; }
+.hero h1 em{ font-style:normal; color:var(--accent); }
+.hero .sub{ margin-top:24px; font-size:16.5px; line-height:1.62; color:var(--dim); max-width:480px; }
+.cta-row{ margin-top:32px; display:flex; gap:14px; flex-wrap:wrap; }
+
+/* Connected care network panel */
+.hero-visual{ position:relative; }
+.net-card{
+  position:relative;
+  background:rgba(255,255,255,.55); border:1px solid var(--card-border); border-radius:26px;
+  box-shadow:var(--shadow); backdrop-filter:blur(10px);
+  padding:26px 22px 18px;
+}
+.net-card svg{ display:block; width:100%; height:auto; }
+.net-line{ stroke:rgba(2,132,199,.35); stroke-width:2; }
+.node-ring{ fill:rgba(255,255,255,.92); stroke:rgba(2,132,199,.45); stroke-width:1.6; }
+.node-icon{ stroke:#0a1826; stroke-width:2; fill:none; stroke-linecap:round; stroke-linejoin:round; }
+.node-icon .cross{ stroke:var(--accent); stroke-width:2.6; }
+.node-label{ font-family:'Inter',sans-serif; font-size:12.5px; font-weight:600; fill:#33506b; text-anchor:middle; }
+.ecg{ fill:none; stroke:var(--accent); stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round;
+  stroke-dasharray:900; stroke-dashoffset:900; animation:ecgDraw 5.5s ease-in-out infinite; }
+@keyframes ecgDraw{ 0%{ stroke-dashoffset:900; } 55%{ stroke-dashoffset:0; } 100%{ stroke-dashoffset:0; } }
+.hub-glow{ fill:rgba(34,211,238,.28); }
+
+/* Floating glass chip */
+.chip{ position:absolute; z-index:5; background:rgba(255,255,255,.68); backdrop-filter:blur(10px); border:1px solid rgba(255,255,255,.85);
+  box-shadow:var(--shadow); border-radius:18px; padding:14px 18px; display:flex; gap:13px; align-items:center; animation:chipFloat 8s ease-in-out infinite; }
+.chip .ic{ width:42px; height:42px; border-radius:12px; background:linear-gradient(135deg,#0ea5e9,#22d3ee); display:flex; align-items:center; justify-content:center; color:#fff; font-size:19px; flex-shrink:0; }
+.chip b{ display:block; font-size:16.5px; font-weight:700; letter-spacing:-.01em; line-height:1.2; }
+.chip span{ font-size:12px; color:var(--dim); font-weight:500; }
+.chip-net{ right:-8px; bottom:-24px; }
+@keyframes chipFloat{ 0%,100%{ transform:translateY(0);} 50%{ transform:translateY(-9px);} }
+
+/* Responsive */
+@media (max-width:960px){
+  header.site{ padding:16px 22px; flex-wrap:wrap; }
+  nav.links{ gap:20px; order:3; width:100%; }
+  .hero-grid{ grid-template-columns:1fr; }
+  .wrap{ padding:0 20px; }
+  .chip-net{ right:0; }
+}
+@media (max-width:560px){
+  .chip{ position:static; margin-top:16px; animation:none; }
+}
+</style>
+</head>
+<body>
+
+<header class="site">
+  <a class="brand" href="../index.html">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="10.5" fill="none" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="16" r="3.4" fill="currentColor"/><path d="M16 1.5v6M16 24.5v6M1.5 16h6M24.5 16h6" stroke="currentColor" stroke-width="1.8"/></svg>
+    <span>NEUROPARSEC</span>
+  </a>
+  <nav class="links">
+    <a href="../index.html" class="on">Home</a>
+    <a href="../projects.html">Projects</a>
+    <a href="../lab.html">Lab</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+  </nav>
+  <a class="btn btn-dark btn-small" href="../contact.html">Book a call</a>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="glow-bg"></div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill">Healthcare AI · Connected care</span>
+        <h1>Revolutionizing<br>Healthcare<br>with <em>AI</em></h1>
+        <p class="sub">One connected journey for every patient. NeuroParsec links the hospital, the care team and the patient into a single calm flow, so enquiries, notes and follow-ups stop falling through the cracks.</p>
+        <div class="cta-row">
+          <a class="btn btn-dark" href="../contact.html">Book a call</a>
+          <a class="btn btn-ghost" href="../projects.html">See the systems</a>
+        </div>
+        <p class="tagline">INTELLIGENCE FOR BETTER HEALTH</p>
+      </div>
+      <div class="hero-visual">
+        <div class="net-card" role="img" aria-label="A connected care network: hospital, patient, care team and phone joined around one hub, with an ECG pulse line running through it.">
+          <svg viewBox="0 0 520 430" aria-hidden="true">
+            <!-- connection lines -->
+            <line class="net-line" x1="260" y1="78" x2="260" y2="180"/>
+            <line class="net-line" x1="228" y1="196" x2="128" y2="204"/>
+            <line class="net-line" x1="292" y1="196" x2="392" y2="204"/>
+            <line class="net-line" x1="260" y1="238" x2="260" y2="306"/>
+            <!-- ECG pulse line -->
+            <polyline class="ecg" points="14,209 148,209 168,209 182,182 196,236 210,209 306,209 322,194 334,224 346,209 506,209"/>
+            <!-- hub -->
+            <circle class="hub-glow" cx="260" cy="209" r="40">
+              <animate attributeName="r" values="34;46;34" dur="2.6s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values=".8;.25;.8" dur="2.6s" repeatCount="indefinite"/>
+            </circle>
+            <circle class="node-ring" cx="260" cy="209" r="27"/>
+            <g class="node-icon">
+              <path class="cross" d="M260 197v24M248 209h24"/>
+            </g>
+            <!-- hospital node -->
+            <circle class="node-ring" cx="260" cy="72" r="34"/>
+            <g class="node-icon">
+              <rect x="246" y="58" width="28" height="28" rx="2"/>
+              <path class="cross" d="M260 64v16M252 72h16"/>
+            </g>
+            <text class="node-label" x="260" y="126">Hospital</text>
+            <!-- patient node -->
+            <circle class="node-ring" cx="92" cy="209" r="34"/>
+            <g class="node-icon">
+              <circle cx="92" cy="199" r="7.5"/>
+              <path d="M77 224c2.5-8 8-12 15-12s12.5 4 15 12"/>
+            </g>
+            <text class="node-label" x="92" y="263">Patient</text>
+            <!-- care team node -->
+            <circle class="node-ring" cx="428" cy="209" r="34"/>
+            <g class="node-icon">
+              <circle cx="419" cy="199" r="6.5"/>
+              <path d="M406 222c2-7 6.5-10.5 13-10.5 2 0 3.8.4 5.4 1.1"/>
+              <circle cx="438" cy="201" r="5.5"/>
+              <path d="M430 213.6c6.8-.6 11.8 2.7 13.8 9.4"/>
+            </g>
+            <text class="node-label" x="428" y="263">Care team</text>
+            <!-- phone node -->
+            <circle class="node-ring" cx="260" cy="340" r="34"/>
+            <g class="node-icon">
+              <rect x="250" y="324" width="20" height="32" rx="4"/>
+              <path d="M256 349h8"/>
+            </g>
+            <text class="node-label" x="260" y="394">Patient phone</text>
+          </svg>
+        </div>
+        <div class="chip chip-net">
+          <div class="ic">✓</div>
+          <div><b>One flow</b><span>Enquiry to follow-up, connected</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+</body>
+</html>
